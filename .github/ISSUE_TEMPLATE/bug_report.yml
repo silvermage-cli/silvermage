@@ -1,0 +1,91 @@
+name: Bug report
+description: Something broken or behaving unexpectedly.
+title: "bug: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. A minimal reproducible example gets a fix
+        faster than anything else. Please keep this focused on a single
+        problem — split unrelated bugs into separate issues.
+
+  - type: input
+    id: version
+    attributes:
+      label: Silvermage version
+      description: Output of `silvermage --version`.
+      placeholder: "v0.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Linux x86_64
+        - Linux aarch64
+        - macOS Intel
+        - macOS Apple Silicon
+        - Windows x86_64
+        - Other (describe in Additional context)
+    validations:
+      required: true
+
+  - type: input
+    id: provider
+    attributes:
+      label: AI provider
+      description: Which provider + model were active when the bug occurred?
+      placeholder: "GLM / glm-4.7"
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened
+      description: Describe the bug in one or two sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps. If a specific prompt or file triggers it, include a sanitised copy.
+      placeholder: |
+        1. Run `silvermage` in an empty directory
+        2. Send `/init`
+        3. Observe crash
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Error messages, stack traces, or a screenshot if the TUI is involved.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: |
+        If Silvermage produced logs (`~/.local/share/silvermage/logs/`), paste
+        the tail here. Redact any API keys or sensitive paths first.
+      render: text
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Anything else worth noting.

@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local installer smoke-test output
+/test-install/
+silvermage
+silvermage.exe
+
+# Release artifacts should never be committed — they live on GitHub Releases.
+*.tar.gz
+*.tar.xz
+*.zip
+*.sha256

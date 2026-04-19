@@ -1,0 +1,50 @@
+name: Feature request
+description: Suggest a new capability or change in behaviour.
+title: "feat: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. Features are more likely to land when you
+        describe the problem before the solution — it lets us consider
+        alternatives we might not have thought of.
+
+        Please search existing issues first to avoid duplicates.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the situation that makes you want this feature. Who hits it, how often, how painful is it today?
+      placeholder: |
+        When working on large repos, `/explore` takes too long because it
+        doesn't parallelise across directories...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should Silvermage do? Rough sketches of UX, commands, config keys, or flows are all fine.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+      description: Other tools, workarounds, or approaches you tried or rejected.
+
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Trade-offs
+      description: What does this cost? (binary size, runtime overhead, UX complexity, new config surface, compatibility with existing plugins, etc.)
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Links, screenshots, references to similar tools.
