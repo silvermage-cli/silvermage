@@ -157,7 +157,13 @@ main() {
         chmod 0755 "${install_dir}/${BIN_NAME}"
     }
 
-    say "installed: ${install_dir}/${BIN_NAME}"
+    # Shorter command aliases. Symlinks so every invocation hits the
+    # same underlying binary — no wasted disk, no drift between names.
+    for alias_name in silver silv sm; do
+        ln -sfn "$BIN_NAME" "${install_dir}/${alias_name}" 2>/dev/null || true
+    done
+
+    say "installed: ${install_dir}/${BIN_NAME} (aliases: silver, silv, sm)"
 
     case ":${PATH}:" in
         *":${install_dir}:"*) ;;

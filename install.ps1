@@ -106,7 +106,16 @@ try {
     $destPath = Join-Path $InstallDir $Bin
     Copy-Item -Path $binSrc.FullName -Destination $destPath -Force
 
-    Say "installed: $destPath"
+    # Shorter command aliases. Windows symlinks would require an admin
+    # token on most configurations, so we ship file copies instead —
+    # tiny disk cost (~31 MB each stripped binary × 3) in exchange for
+    # a no-prompt install.
+    foreach ($aliasName in @('silver.exe', 'silv.exe', 'sm.exe')) {
+        $aliasPath = Join-Path $InstallDir $aliasName
+        Copy-Item -Path $destPath -Destination $aliasPath -Force
+    }
+
+    Say "installed: $destPath (aliases: silver, silv, sm)"
 
     # --- PATH hint -----------------------------------------------------------
 

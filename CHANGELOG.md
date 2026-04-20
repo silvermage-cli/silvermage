@@ -31,6 +31,7 @@ Silvermage v0.1.1 — in-binary auto-updater. Running silvermage now tells you w
 - In-place install — Install downloads the correct tarball for your platform, verifies the SHA256 sidecar, and swaps the binary cleanly. On Windows the locked-exe case is handled automatically. Exit and relaunch silvermage to use the new version.
 - Ghost orb reacts with an "Update available" bubble the first time a new version is discovered in a session.
 - Version pill under the ASCII logo on startup — left-aligned, inverted-theme colours, shows the exact version at a glance.
+- Shorter command aliases: `silver`, `silv`, and `sm` are now created alongside `silvermage` by the install scripts (symlinks on Unix, copies on Windows).
 
 ## Improvements
 
