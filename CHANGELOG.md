@@ -19,6 +19,70 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.0] — 2026-04-20
+
+Silvermage v0.1.0 — first public release. A security-first, agentic CLI coding assistant in a single static binary.
+
+## What's new
+
+- Multi-provider support for GLM/Zhipu, OpenRouter, MiniMax, and Ollama (local). Swap providers + models mid-session with `/providers` and `/model`.
+- 30+ built-in tools — file read/write with indentation-tolerant matching, command execution with sandbox + deny-list, search, web fetch, process control, and more.
+- Claude Code-compatible plugin system — slash commands, hooks (file + inline), MCP servers, and skills. Browse and install via `/plugin`.
+- Built-in skills for `/explore`, `/review`, `/init`, with parallel sub-agent fan-out and skill-style prompts.
+- Remote terminal access via `/remote` — share a live session to a browser over Tailscale, with per-connection kick, heartbeat, rate-limited auth, and cleartext-LAN warnings.
+- Plugin marketplace — browse, install, refresh, and vet plugins from multiple sources. Tab-aware navigation, search, and README rendering in the unified `/plugin` modal.
+- Eleven themes — Silvermage (default), Classic Comfort, Kanagawa, Kanagawa Dragon, Catppuccin Mocha + Frappé, Solarized, light, high-contrast, and colorblind-safe. Live preview with `/theme`.
+- Full MCP (Model Context Protocol) integration — add servers via template catalog or inline plugin manifests.
+- Session persistence with `/resume`, named snapshots, and AI-generated topic summaries.
+- Dual-tier context management — recency cache, ground-truth doc cache, per-cache budgets visible in `/context`. Manual `/compact` with AI summarisation.
+- Task-list tool for session-scoped task tracking, surfaced in the system prompt.
+- Status-bar indicators for background processes and remote sessions — click to open the matching modal.
+- Ghost orb companion with tool-driven insights — reacts to long-running work, failures, and remote connections.
+- Windows + macOS + Linux support out of the box.
+
+## Security
+
+- Handle-based secret vault tokenises known exact values (`$$SMSECRET:KEY$$`) at the tool-actor boundary. The AI never sees raw credentials; the shell always does.
+- `.env` auto-ingestion with consent prompt at startup and silent ingest on `read_file`.
+- Command deny-list for destructive operations (unbypassable, per-OS pattern matching).
+- Permission modal in strict mode for stateful tools. `Ctrl+P` toggles strict / bypass.
+- Real-time credential masking before output reaches the AI.
+- Remote terminal auth token carried in URL fragment + WebSocket subprotocol header only, never in query strings or access logs.
+- Per-peer rate limit on WebSocket auth failures.
+
+## Install
+
+```sh
+curl -sSf https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.sh | sh
+```
+
+Windows PowerShell:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.ps1 | iex
+```
+
+Or download the tarball for your platform below and verify its `.sha256` sidecar before running.
+
+## Platform support
+
+| Target | Archive |
+|---|---|
+| Linux x86_64 (musl static) | `silvermage-x86_64-unknown-linux-musl.tar.gz` |
+| Linux aarch64 (musl static) | `silvermage-aarch64-unknown-linux-musl.tar.gz` |
+| macOS x86_64 (Intel) | `silvermage-x86_64-apple-darwin.tar.gz` |
+| macOS aarch64 (Apple Silicon) | `silvermage-aarch64-apple-darwin.tar.gz` |
+| Windows x86_64 | `silvermage-x86_64-pc-windows-msvc.zip` |
+
+Linux musl builds run on any glibc version and on Alpine.
+
+## First run
+
+```sh
+silvermage
+```
+
+You'll be walked through provider selection and API key entry. Keys land in `~/.config/silvermage/credentials.toml` with `chmod 600` and never touch chat history.
 ## [0.1.0] — YYYY-MM-DD
 
 Initial public release.
