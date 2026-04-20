@@ -19,6 +19,38 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.1] — 2026-04-20
+
+Silvermage v0.1.1 — in-binary auto-updater. Running silvermage now tells you when a new release lands, and a single `/update` swaps the binary in place.
+
+## What's new
+
+- Startup check — silvermage pings the release repo once per launch (non-blocking, 24-hour cache) and notes any newer version without delaying your session.
+- Status-bar indicator — an `↑ vX.Y.Z` badge appears on the right side of the status bar when an update is available. Click it to open the update modal.
+- `/update` slash command — pops the update modal showing the target version, full release notes, and an Install / Cancel prompt. When silvermage is already on the latest version, it prints a clear confirmation instead of leaving you hanging; when a newer release is found, the modal opens automatically.
+- In-place install — Install downloads the correct tarball for your platform, verifies the SHA256 sidecar, and swaps the binary cleanly. On Windows the locked-exe case is handled automatically. Exit and relaunch silvermage to use the new version.
+- Ghost orb reacts with an "Update available" bubble the first time a new version is discovered in a session.
+- Version pill under the ASCII logo on startup — left-aligned, inverted-theme colours, shows the exact version at a glance.
+
+## Improvements
+
+- New `[updater]` config section — `enabled` (default on), `check_interval_hours` (default 24), and `include_prereleases` (default off) for opting into release-candidate tags.
+- New CLI flag `--no-update-check` disables the startup check for a single run. Useful on flaky networks or for a fast, offline launch.
+- Release tarballs ship their contents at the archive root (binary + `LICENSE` + `README.md`) for a uniform auto-update layout across targets.
+
+## Install
+
+```sh
+curl -sSf https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.sh | sh
+```
+
+Windows PowerShell:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.ps1 | iex
+```
+
+Already on v0.1.0? Run `/update` inside silvermage.
 ## [0.1.0] — 2026-04-20
 
 Silvermage v0.1.0 — first public release. A security-first, agentic CLI coding assistant in a single static binary.
@@ -116,3 +148,4 @@ Initial public release.
 
 [Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.1...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
+[0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
