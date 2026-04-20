@@ -19,6 +19,28 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.3] — 2026-04-20
+
+Silvermage v0.1.3 — startup now opens with a themed boot receipt that shows what loaded (hooks, memories, plugins, skills, project snapshots, MCP servers) so you can see at a glance what came up and what didn't.
+
+## What's new
+
+- **Startup boot receipt.** Under the version pill, silvermage now prints a 6-step checklist that shows each subsystem coming online — hooks, memories, plugins, skills, project snapshots, and MCP servers — with a live spinner that flips to a green ✓ and the loaded count as each one resolves. MCP reports its real progress; the rest reveal on a short staggered timer so the panel reads as a rhythm instead of a flash. A pink→blue "✨ Ready." capper lands once every step is done; if any step failed (e.g. an MCP server wouldn't start), the capper switches to a warning variant and the failing line shows `✗` with a count.
+- **Welcome line reads above the receipt.** The greeting now sits directly under the version pill and above the boot checklist — the greeting leads, the checklist follows, and the first-run quick-start panel (when shown) lands last.
+
+## Install
+
+```sh
+curl -sSf https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.sh | sh
+```
+
+Windows PowerShell:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.ps1 | iex
+```
+
+Already on v0.1.2? Run `/update` inside silvermage.
 ## [0.1.2] — 2026-04-20
 
 Silvermage v0.1.2 — two correctness fixes that land in the same release. Status-bar indicators now actually update in the background, and the agent no longer duplicates wrap-up prose after successful tool runs.
@@ -169,7 +191,8 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.3...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
+[0.1.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.3
