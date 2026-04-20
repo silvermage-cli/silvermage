@@ -19,6 +19,28 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.2] — 2026-04-20
+
+Silvermage v0.1.2 — two correctness fixes that land in the same release. Status-bar indicators now actually update in the background, and the agent no longer duplicates wrap-up prose after successful tool runs.
+
+## Fixes
+
+- **Status-bar indicators stay live between turns.** Background state changes — a new release being discovered, a background process spawning via `execute_command` with `detach: true`, remote WebSocket connection count changing — now surface in the status bar without waiting for a keypress. The render loop previously only refreshed on Key/Paste/Mouse events, so the `⚙ N`, `↑ vX.Y.Z`, and `🌐 :port (N)` indicators froze the moment a turn ended. Tick-driven redraws now fire roughly every 250 ms, enough to keep indicators responsive without flooding the terminal.
+- **Preamble-nudge no longer misfires on post-tool wrap-ups.** Short assistant responses after a successful tool wave ("Wrote VOICE.md. Covers all four providers…") were being misclassified as truncated preambles, triggering a retry iteration that duplicated the synthesis text in session history and burned extra API tokens. The nudge now only fires before any tool has run this turn — which preserves its original job of catching "I'll create the files. Let me start:" with no action, while treating genuine summaries after tool execution as valid.
+
+## Install
+
+```sh
+curl -sSf https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.sh | sh
+```
+
+Windows PowerShell:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.ps1 | iex
+```
+
+Already on v0.1.1? Run `/update` inside silvermage.
 ## [0.1.1] — 2026-04-20
 
 Silvermage v0.1.1 — in-binary auto-updater. Running silvermage now tells you when a new release lands, and a single `/update` swaps the binary in place.
@@ -147,6 +169,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.2...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
+[0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
