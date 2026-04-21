@@ -69,6 +69,15 @@ iwr -useb https://raw.githubusercontent.com/silvermage-cli/silvermage/main/insta
 
 Installs to `$env:LOCALAPPDATA\Programs\silvermage`.
 
+### Windows (cmd.exe)
+
+```bat
+curl -fsSL https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+Same install location as the PowerShell flow, no execution-policy prompt.
+Requires Windows 10 1803+ (native `curl.exe` and `tar.exe`).
+
 ### Manual
 
 Grab the matching tarball from the
