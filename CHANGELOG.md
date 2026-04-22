@@ -19,6 +19,22 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.5] — 2026-04-22
+
+Two targeted fixes for modal interaction during streaming and for smoother MiniMax output.
+
+## Fixes
+
+- Stop aborting the AI when you close a modal mid-stream. Opening a modal (like `/model`) while the assistant is still working now lets you press Esc to dismiss the modal without interrupting the in-flight response. Esc only cancels the stream when no modal is open.
+- Prevent MiniMax streams from occasionally gluing adjacent words together. Standalone whitespace deltas in the response are no longer silently dropped while `<think>` tags are being parsed.
+
+## Install
+
+```sh
+curl -fsSL https://silvermage.com/install.sh | sh
+```
+
+Already installed? Run `/update` inside silvermage, or pick up the new binary from [silvermage.com/downloads](https://silvermage.com/downloads).
 ## [0.1.4] — 2026-04-22
 
 Silvermage v0.1.4 — four UX fixes: confirm modals that fit small terminals, an `/update` that doesn't lock you out, a `/clear` that actually clears, and breathing room between tool output and the spinner.
@@ -215,9 +231,10 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.5...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
 [0.1.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.3
 [0.1.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.4
+[0.1.5]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.5
