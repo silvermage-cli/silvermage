@@ -19,6 +19,30 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.4] — 2026-04-22
+
+Silvermage v0.1.4 — four UX fixes: confirm modals that fit small terminals, an `/update` that doesn't lock you out, a `/clear` that actually clears, and breathing room between tool output and the spinner.
+
+## Fixes
+
+- **Confirm modals stay readable in small terminals.** The yes/no modal (shown for `.env` ingest consent, secret delete, remote stop, and a few others) used to size itself as a percentage of the terminal height. In a quartered Arch window — or any split-terminal layout — that percentage collapsed to a handful of rows, dropping the yes/no buttons and hint off the bottom with no way to scroll. The modal is now sized by its actual content, buttons + hint are pinned to the bottom so they're always visible, and a ▲/▼ marker appears on the right edge when prompt text is clipped so you can scroll with ↑/↓.
+- **`/update` no longer locks the terminal on install.** Pressing Enter in the update modal used to surface the stuck behaviour several of you hit: keys bled into the chat input and the session became unresponsive until you killed and relaunched silvermage. The underlying cause was a duplicate confirmation prompt inside the update library reading stdin while the TUI already held it. The modal's Install click is now the only confirmation required — the install runs cleanly and your keyboard keeps working.
+- **`/clear` actually clears.** It used to wipe the visible chat and the conversation history sent to the provider, but left stale telemetry behind — the status bar kept showing tokens from cleared turns, `/context` still showed conversation slots populated, and the ghost orb's wake-from-AFK recap could quote a chat that no longer existed. Those four signals now reset together. Project-scoped state (memories, alignments, input history) and startup-fixed context slots are preserved.
+- **Tool output no longer collides with the spinner line.** While a turn was streaming, a bottom-pinned tool call bubble would touch the spinner row directly with no gap, which made the UI feel cramped and sometimes hard to read. A one-row breathing space now sits between the chat scrollback and the spinner whenever a turn is in flight.
+
+## Install
+
+```sh
+curl -sSf https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.sh | sh
+```
+
+Windows PowerShell:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/silvermage-cli/silvermage/main/install.ps1 | iex
+```
+
+Already on v0.1.3? Run `/update` inside silvermage.
 ## [0.1.3] — 2026-04-20
 
 Silvermage v0.1.3 — startup now opens with a themed boot receipt that shows what loaded (hooks, memories, plugins, skills, project snapshots, MCP servers) so you can see at a glance what came up and what didn't.
@@ -191,8 +215,9 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.4...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
 [0.1.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.3
+[0.1.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.4
