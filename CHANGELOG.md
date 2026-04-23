@@ -19,6 +19,29 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.6] — 2026-04-23
+
+Stability-focused release. Fixes a long-session crash affecting MiniMax, GLM, and any other OpenAI-spec provider, plus the recent streaming polish for MiniMax.
+
+## Fixes
+
+- Stop long sessions from failing with "tool id not found" 400 errors. After enough turns, recency-cached tool results could outlive the old assistant message that declared them, leaving orphan tool_call_ids on the wire that spec-conformant providers (MiniMax, GLM, OpenAI) reject. The history compressor now keeps each assistant and its tool results together, and a post-compression validator strips anything that still slips through. Affects all providers, not just MiniMax.
+- Render one thinking bubble and one response bubble per turn, even when MiniMax interleaves reasoning mid-synthesis. Previously the UI fragmented the response into many small bubbles as reasoning and content events alternated — now each phase has its own bubble that grows in place.
+- Remove the blank line that appeared above MiniMax responses after the thinking phase ended.
+
+## Improvements
+
+- Smooth MiniMax output with an adaptive pacer. Standard MiniMax variants flush SSE frames a line or two at a time, which rendered as jerky bursts. The pacer drip-feeds characters at a rate matched to the source's measured throughput, producing typewriter-style output without growing lag.
+- Eliminate duplicate thinking output on MiniMax. The provider now requests `reasoning_split: true` so thinking arrives in its own structured field instead of as `<think>...</think>` tags embedded in content.
+- Surface the MiniMax highspeed tier in the model picker: MiniMax M2.5 Highspeed, M2.7 Highspeed, and M2.1 Lightning now appear after the standard variants. These already stream smoothly, so they skip the pacer.
+
+## Install
+
+```sh
+curl -fsSL https://silvermage.com/install.sh | sh
+```
+
+Already installed? Run `/update` inside silvermage, or pick up the new binary from [silvermage.com/downloads](https://silvermage.com/downloads).
 ## [0.1.5] — 2026-04-22
 
 Four targeted fixes for modal interaction during streaming and for the update flow itself.
@@ -233,10 +256,11 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.6...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
 [0.1.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.3
 [0.1.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.4
 [0.1.5]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.5
+[0.1.6]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.6
