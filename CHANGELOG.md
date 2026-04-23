@@ -19,6 +19,23 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.7] — 2026-04-23
+
+Hotfix: `/update` now actually works.
+
+## Fixes
+
+- Fix in-binary auto-update. Release archives shipped with leading `./` on every path (`./silvermage`, `./README.md`, `./LICENSE`), which caused `self_update` to report `Could not find the required path in the archive: "silvermage"`. `/update` has been silently broken since v0.1.0 — v0.1.5's error-chain surfacing is what made the underlying bug visible. This release repacks archives with bare paths. From v0.1.6 onward `/update` works cleanly to v0.1.7+.
+
+## Upgrading from v0.1.6 or earlier
+
+`/update` cannot pull this release on the affected builds (they are the broken ones). Reinstall once:
+
+```sh
+curl -fsSL https://silvermage.com/install.sh | sh
+```
+
+From v0.1.7 forward, `/update` auto-upgrades as intended.
 ## [0.1.6] — 2026-04-23
 
 Stability-focused release. Fixes a long-session crash affecting MiniMax, GLM, and any other OpenAI-spec provider, plus the recent streaming polish for MiniMax.
@@ -256,7 +273,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.6...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.7...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -264,3 +281,4 @@ Initial public release.
 [0.1.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.4
 [0.1.5]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.5
 [0.1.6]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.6
+[0.1.7]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.7
