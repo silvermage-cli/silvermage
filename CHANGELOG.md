@@ -19,6 +19,16 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.10] — 2026-06-02
+
+A hotfix release focused on Windows: self-update, bash mode, and form input all work correctly now, plus a copy-button fix.
+
+## Fixes
+
+- **Windows self-update now works.** Updates previously failed with "Compression method not supported" — the Windows `.zip` could not be unpacked. Note: because the fix ships *inside* the updater, Windows users on an older version need to download this release manually once; auto-update works from here on.
+- **Windows bash mode can be enabled.** Pressing `!` to enter bash mode did nothing on Windows; it now toggles as expected.
+- **Windows Ollama setup accepts full URLs.** Shifted characters (`:`, uppercase, etc.) were dropped while typing, so addresses like `http://host:11434` couldn't be entered. Fixed.
+- **Copy buttons grab the right text.** When a memory was saved at the end of a turn, the synthesis/all copy could capture the memory note instead of the actual answer. It now copies the real synthesis.
 ## [0.1.9] — 2026-06-02
 
 New MiniMax M3 models, a quick-stash shortcut for your draft input, and a move to the Apache 2.0 license.
@@ -294,7 +304,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.9...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.10...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -304,3 +314,4 @@ Initial public release.
 [0.1.6]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.6
 [0.1.7]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.7
 [0.1.9]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.9
+[0.1.10]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.10
