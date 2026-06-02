@@ -19,6 +19,27 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.9] — 2026-06-02
+
+New MiniMax M3 models, a quick-stash shortcut for your draft input, and a move to the Apache 2.0 license.
+
+## What's new
+
+- Add **MiniMax M3** and **MiniMax M3 Highspeed** to the MiniMax provider.
+- Stash your in-progress input with **Ctrl+S** and bring it back later. A ghost-orb indicator shows when a draft is held and restores it on submit.
+
+## Fixes
+
+- Copy buttons now stay scoped to their own message, so you copy the right reply — and the substantive answer is preferred when copying.
+
+## Improvements
+
+- Surface GLM-4.5 ahead of GLM-4.7 in the model list.
+- Time-box the stash indicator bubble to 10 seconds so it no longer lingers on screen.
+
+## Licensing
+
+- Silvermage now ships under the **Apache License 2.0** (previously MIT), with a `NOTICE` file covering attribution. Both are included in every download.
 ## [0.1.7] — 2026-04-23
 
 Hotfix: `/update` now actually works.
@@ -273,7 +294,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.7...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.9...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -282,3 +303,4 @@ Initial public release.
 [0.1.5]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.5
 [0.1.6]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.6
 [0.1.7]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.7
+[0.1.9]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.9
