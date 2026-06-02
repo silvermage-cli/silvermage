@@ -133,4 +133,5 @@ auto-loaded read-only.
 
 ## License
 
-Silvermage is distributed under the [MIT License](LICENSE).
+Silvermage is distributed under the [Apache License 2.0](LICENSE). See
+[NOTICE](NOTICE) for attribution terms.

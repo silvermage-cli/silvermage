@@ -1,0 +1,19 @@
+Silvermage
+Copyright 2026 silvermage-cli
+
+This product is licensed under the Apache License, Version 2.0 (see the
+LICENSE file).
+
+It includes original prompt text, skill and strategy documents, and tool
+definitions authored by silvermage-cli. Where you redistribute or reuse
+that text, in whole or in substantial part — including text obtained by
+inspecting, decompiling, or disassembling the distributed binary — you must
+retain this notice and attribute "Silvermage (silvermage-cli)" in accordance
+with Section 4 of the License.
+
+This requirement applies to the copied expression (the text itself). It does
+not restrict independently authored implementations of similar functionality.
+
+"Silvermage" and the Silvermage name and logo are trademarks of
+silvermage-cli and are not licensed for use on derivative or redistributed
+works (see Section 6 of the License).

@@ -54,8 +54,9 @@ quickly.
 
 ## Licensing
 
-Silvermage is MIT-licensed. By filing an issue or discussion you agree your
-contribution (text, reports, examples) is licensed the same way.
+Silvermage is licensed under the Apache License 2.0. By filing an issue or
+discussion you agree your contribution (text, reports, examples) is licensed
+the same way.
 
 ## Thanks
 
