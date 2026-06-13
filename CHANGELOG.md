@@ -19,6 +19,13 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.11] — 2026-06-13
+
+Adds the new GLM-5.2 model.
+
+## What's new
+
+- **GLM-5.2** is now available in the GLM provider, with a 1M-token context window.
 ## [0.1.10] — 2026-06-02
 
 A hotfix release focused on Windows: self-update, bash mode, and form input all work correctly now, plus a copy-button fix.
@@ -304,7 +311,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.10...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.11...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -315,3 +322,4 @@ Initial public release.
 [0.1.7]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.7
 [0.1.9]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.9
 [0.1.10]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.10
+[0.1.11]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.11
