@@ -19,6 +19,13 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.12] — 2026-06-13
+
+Newly added models now show up automatically after an update.
+
+## Improvements
+
+- The model list refreshes itself whenever you update Silvermage, so models added in a new release (like GLM-5.2) appear immediately — no need to clear any cache by hand. Works the same on Linux, macOS, and Windows.
 ## [0.1.11] — 2026-06-13
 
 Adds the new GLM-5.2 model.
@@ -311,7 +318,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.11...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.12...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -323,3 +330,4 @@ Initial public release.
 [0.1.9]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.9
 [0.1.10]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.10
 [0.1.11]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.11
+[0.1.12]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.12
