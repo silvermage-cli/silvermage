@@ -19,6 +19,21 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.13] — 2026-06-17
+
+A reliability release: fewer wrong edits and read/write loops, safer file operations, and a terminal scroll fix.
+
+## Fixes
+- Fix the mouse wheel sometimes scrolling your command history instead of the conversation after switching windows or resizing the terminal.
+- Fix symbol and outline reads returning only a function's signature for Python and for code with braces inside strings or comments — a frequent cause of edit-retry loops.
+- Fix code search ignoring directory glob patterns such as `src/**/*.rs`.
+
+## Improvements
+- Prevent low-confidence fuzzy edits from silently landing in the wrong place — the editor now asks for a line hint or a re-read instead of guessing.
+- Make directory deletion reversible — folders are snapshotted before removal so they can be restored.
+- Prevent data loss when moving a file onto an existing one by snapshotting the destination first.
+- Report when code search skips unreadable or binary files, so a partial search isn't mistaken for no matches.
+- Guide reading of very large files toward targeted range and outline reads.
 ## [0.1.12] — 2026-06-13
 
 Newly added models now show up automatically after an update.
@@ -318,7 +333,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.12...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.13...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -331,3 +346,4 @@ Initial public release.
 [0.1.10]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.10
 [0.1.11]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.11
 [0.1.12]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.12
+[0.1.13]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.13
