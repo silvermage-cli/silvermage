@@ -19,6 +19,19 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.1.14] — 2026-06-18
+
+Context limits now scale to your model's window — big-context models keep far more in mind automatically — plus a fix for sub-agent replies that cut off mid-answer.
+
+## What's new
+- Scale context budgets to the active model automatically. On large-context models (the 1M-token GLM and MiniMax tiers), silvermage now keeps far more of your recent work and documentation verbatim instead of compressing it early, and scales down safely on smaller models — no manual tuning.
+- Add per-provider budget overrides for setups that need different limits (e.g. a smaller-window OpenRouter model).
+
+## Fixes
+- Fix sub-agent replies (task / code review) truncating mid-answer and re-running — long syntheses now complete in one pass.
+
+## Improvements
+- Let sub-agents manage their own context on deep tasks: they gather broadly, then trim already-used file reads while keeping their findings, so long reviews and explorations don't choke.
 ## [0.1.13] — 2026-06-17
 
 A reliability release: fewer wrong edits and read/write loops, safer file operations, and a terminal scroll fix.
@@ -333,7 +346,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.13...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.14...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -347,3 +360,4 @@ Initial public release.
 [0.1.11]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.11
 [0.1.12]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.12
 [0.1.13]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.13
+[0.1.14]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.14
