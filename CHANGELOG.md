@@ -19,6 +19,24 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.2.1] — 2026-06-19
+
+Review now maps the blast radius of every confirmed finding, research stops cutting deep investigations short, and the review verification summary is now honest.
+
+## What's new
+
+- Review now maps the **blast radius** of every confirmed finding — callers and dependents that could break, plus sibling spots in the *same change* that share the flaw — shown as an `Impact:` block under the finding. Most useful on wide diffs and shared-contract changes, where the ripple isn't obvious by eye.
+
+## Fixes
+
+- Research no longer cuts deep investigations short. A thorough sweep that needed more passes was being force-summarized early ("iteration limit reached") and losing coverage; the ceiling is now generous (and configurable).
+- Review's verification summary is now honest — it counts only findings a skeptic actually confirmed and labels the rest "kept unverified," instead of reporting every surviving finding as verified.
+- Review's blast-radius mapping runs only on genuinely-confirmed findings, never on ones whose verifier failed.
+
+## Improvements
+
+- Wider research fan-out by default — more parallel investigators, so multi-part questions finish in fewer waves.
+- Research feature toggles (concern surfacing, deepening, anchor-check, the verify budget) and the explorer iteration ceilings are now tunable from `/config` and the config file.
 ## [0.2.0] — 2026-06-19
 
 Silvermage gains deep multi-agent research and review, a major fix for compaction on large-context models, and a broad security and reliability hardening pass.
@@ -379,7 +397,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.2.1...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -395,3 +413,4 @@ Initial public release.
 [0.1.13]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.13
 [0.1.14]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.14
 [0.2.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.2.0
+[0.2.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.2.1
