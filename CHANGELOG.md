@@ -19,6 +19,39 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.2.0] — 2026-06-19
+
+Silvermage gains deep multi-agent research and review, a major fix for compaction on large-context models, and a broad security and reliability hardening pass.
+
+## What's new
+
+- Add `/research` — a deep, parallel investigation: it breaks a question into independent slices, explores them concurrently, and merges the results into one coherent, citation-anchored map. It then surfaces concrete concerns, each adversarially verified, and maps the blast radius of confirmed high-severity ones.
+- Add `/review` — an adversarial code review where every finding is re-challenged by a skeptic (Is it reachable? Is it intentional? Would the fix actually change a test?) before it is shown, so dead-code and by-design false positives are dropped and severities are right-sized.
+- Surface live progress for both pipelines — each slice and each finding reports what it is doing, in place under the tool.
+- Run either on the model's own judgment mid-task, or on demand via the slash command.
+
+## Fixes
+
+- Fix compaction on large-context models — it now runs on the main model, so it can actually summarize conversations that grow toward the model's full window instead of silently failing on big sessions.
+- Keep partial command output when a command times out or is cancelled, instead of discarding the diagnostics.
+- Recover from a provider error mid-turn instead of dropping the turn.
+- Make edits to binary files revertible, and roll back partially-applied multi-file renames when one of them fails.
+- Prevent a timed-out terminal command from leaving an orphaned process running.
+- Fix a crash when truncating summaries that contain multi-byte characters.
+
+## Security
+
+- Close a server-side request forgery hole in web fetch — redirects and DNS rebinding are re-validated against the safety rules, and fetched content is scanned for credentials before the model sees it.
+- Strengthen the dangerous-command guard — it now catches quoted paths, full-path and long-form `rm`, and destructive commands hidden after a pipe or `&`.
+- Apply the `.git` write protection across every file-writing tool, and block path-traversal exfiltration through git-history queries.
+- Time-bound external tool-server calls so one unresponsive server cannot stall the rest.
+
+## Improvements
+
+- Anchor-check `/explore` results — citations that do not point at a real file and line are flagged, so hallucinated references are caught.
+- Run quick side tasks like session naming on a faster, current-generation model tier.
+- Widen research's parallel fan-out and rein in runaway explorers and over-long concern lists.
+- Lower the overhead of credential masking.
 ## [0.1.14] — 2026-06-18
 
 Context limits now scale to your model's window — big-context models keep far more in mind automatically — plus a fix for sub-agent replies that cut off mid-answer.
@@ -346,7 +379,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.1.14...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.2.0...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -361,3 +394,4 @@ Initial public release.
 [0.1.12]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.12
 [0.1.13]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.13
 [0.1.14]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.14
+[0.2.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.2.0
