@@ -19,6 +19,41 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.3.0] — 2026-06-20
+
+## Silvermage v0.3.0
+
+A feature-bearing release: a reworked copy experience, smarter "file not found" errors, a sharper Ghosty, and a large batch of correctness fixes across editing, search, hooks, and background-process lifecycle.
+
+### Highlights
+
+- **Copy pills, reworked.** The Tools / Synth / All pills on each usage-summary line now:
+  - work on **every turn**, not just the latest (clicking a previous turn's Synth used to do nothing), and each scopes the clipboard to its own turn;
+  - carry a **`Copy:`** affordance so it's clear they copy;
+  - flash **green `✓`** on success and **red `✗`** on failure (clicked turn only);
+  - render with a **distinct per-theme background** (separate from input/paste chips);
+  - get a short, randomized **Ghosty quip** on a successful copy.
+- **"File not found" now helps you.** A missing read path lists the nearest existing directory's contents — same-extension matches first — so a wrong path (typo, wrong subdir, moved file, `lib.rs` vs `main.rs`) self-corrects without a follow-up listing. Bounded to the workspace.
+- **Ghosty (the ghost orb).** Reworked insight surfacing: readable ~10s bubble holds, a "Talking" body, and priority transitions so a critical message cleanly replaces a quip instead of snapping over it.
+- **One converged system prompt** with a shared Operating Core for sub-agents (each sub-agent carries only the capabilities it actually has).
+- **`/context`** now tracks the ghost-insight injection as its own line.
+
+### Fixes
+
+- **Editing**
+  - Snippet/file chips now **expand for slash commands** (`/research`, `/review`, `/explore`, plugins) — they were sent as the literal `📋 Snippet #N` label.
+  - `batch_edit` no longer corrupts exact-match structural changes and cleans up orphaned closing braces (now matching `replace`).
+  - Tab-indented files that align with spaces are correctly detected as **Tabs** (were mis-read as spaces).
+- **Search**
+  - `search_code` / `find_files` with a **file path as the root** now search that file (was a silent "No matches"); glob-filtered files are surfaced; the exclude-directory lists are unified.
+  - `read_file_range` / `read_file_outline` give an actionable error when handed a directory.
+- **Hooks** — `onPostCompact` now fires (was shipped but dead), and `onContextCompact` fires **before** compaction, per its documented timing.
+- **Background processes** — MCP service tasks and their child processes shut down cleanly on exit; detached-process monitors are awaited on shutdown so kills aren't lost during teardown.
+- **Tool errors** — atomic edit revert, retry gating on stream errors, and a `.git` read guard across all read tools.
+
+### Internal
+
+- Tiered the Operating Core so sub-agents only carry write/orchestration mandates when applicable; removed dead `ProcessRegistry::remove`; documented the sanctioned `tokio::spawn` exceptions.
 ## [0.2.1] — 2026-06-19
 
 Review now maps the blast radius of every confirmed finding, research stops cutting deep investigations short, and the review verification summary is now honest.
@@ -397,7 +432,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.3.0...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -414,3 +449,4 @@ Initial public release.
 [0.1.14]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.14
 [0.2.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.2.0
 [0.2.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.2.1
+[0.3.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.3.0
