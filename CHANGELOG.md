@@ -19,6 +19,15 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.4.0] — 2026-06-21
+
+**TL;DR:** Quitting no longer leaves your terminal spewing escape characters, and the copy pills now capture the full answer.
+
+## Fixes
+
+- **Restore the terminal cleanly on quit.** Mouse-tracking was only turned off after background cleanup finished, so exiting — especially right after cancelling a long operation — could leave the shell flooded with stray characters on every mouse move (`command not found` spam). Mouse, paste, and focus reporting are now disabled the instant you quit, before any shutdown work runs.
+- **Copy the whole final answer from the "Synth" pill.** It previously picked a single line by length, so a short final answer could be shadowed by an earlier paragraph, or a multi-part answer truncated. It now takes the complete answer that follows the last tool step.
+- **Keep the tool section in "All".** A cancelled or output-less tool used to make "All" collapse to the synthesis alone. "All" now always includes a tool section when a tool ran, so it can never silently look identical to "Synth".
 ## [0.3.0] — 2026-06-20
 
 ## Silvermage v0.3.0
@@ -432,7 +441,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.0...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -450,3 +459,4 @@ Initial public release.
 [0.2.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.2.0
 [0.2.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.2.1
 [0.3.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.3.0
+[0.4.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.0
