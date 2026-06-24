@@ -19,6 +19,20 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.4.1] — 2026-06-24
+
+A reliability pass: tools accept more of what the model sends, the Copy buttons grab the whole result, and the ghost companion now keeps pace with long-running work.
+
+## What's new
+- Surface research and review progress through the ghost companion — it reacts as each stage advances (planning, sweeping, synthesizing, verifying) and when a sub-agent finishes.
+
+## Fixes
+- Fix built-in tools intermittently rejecting valid actions on some models — clarifying questions, file edits, and batch edits no longer fail on near-miss argument formatting.
+- Fix the Copy buttons truncating long tool output; "Tools" and "All" now copy the complete result.
+- Fix the on-subagent-stop hook reporting success even when a sub-agent failed.
+
+## Improvements
+- Keep the ghost companion's speech tracking the latest activity during tool-heavy turns instead of sticking on the first line.
 ## [0.4.0] — 2026-06-21
 
 **TL;DR:** Quitting no longer leaves your terminal spewing escape characters, and the copy pills now capture the full answer.
@@ -441,7 +455,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.1...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -460,3 +474,4 @@ Initial public release.
 [0.2.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.2.1
 [0.3.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.3.0
 [0.4.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.0
+[0.4.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.1
