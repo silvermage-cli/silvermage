@@ -19,6 +19,21 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.4.2] — 2026-06-24
+
+Reliability and safety hardening across providers, MCP, and token accounting.
+
+## Security
+- Require the MCP security acknowledgment before connecting to any configured server — previously a server list could connect at startup without the notice being shown.
+
+## Fixes
+- Honor a provider's `Retry-After` on rate limits (GLM, MiniMax, OpenRouter) so retries wait the requested time instead of a fixed schedule.
+- Retry transient Ollama errors (rate limits and 5xx) and report authentication failures clearly, instead of treating every error the same.
+- Stop writing the request body to the debug log on GLM requests.
+
+## Improvements
+- Estimate token usage for non-OpenAI OpenRouter models (Llama, Anthropic, Mistral, and others) far more accurately, which keeps context budgeting from drifting.
+- Keep written plans inside the working directory by routing them through the same path checks as every other file write.
 ## [0.4.1] — 2026-06-24
 
 A reliability pass: tools accept more of what the model sends, the Copy buttons grab the whole result, and the ghost companion now keeps pace with long-running work.
@@ -455,7 +470,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.2...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -475,3 +490,4 @@ Initial public release.
 [0.3.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.3.0
 [0.4.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.0
 [0.4.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.1
+[0.4.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.2
