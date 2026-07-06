@@ -19,6 +19,21 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.4.3] — 2026-07-06
+
+Quit now asks for a confirming second Ctrl+C so you can't drop a session by accident, the status bar keeps up with your current git branch, and duplicate session saves are gone.
+
+## What's new
+- Double-tap Ctrl+C to quit: the first press shows a "press Ctrl+C again to quit" hint, and a second press within ~1.5 seconds confirms. Esc still interrupts the current turn.
+
+## Fixes
+- Keep the status bar's git branch in sync when you switch branches, instead of showing the branch from when the app started.
+- Save each conversation as a single session entry — no more near-duplicate pairs cluttering the resume list.
+- Exit reliably and quickly on Ctrl+C, including during long streaming responses or while background services are shutting down.
+- Launch correctly on older Windows consoles that don't support bracketed paste.
+
+## Improvements
+- Prune old auto-saved sessions by how recently they were used, and never remove a named snapshot.
 ## [0.4.2] — 2026-06-24
 
 Reliability and safety hardening across providers, MCP, and token accounting.
@@ -470,7 +485,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.3...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -491,3 +506,4 @@ Initial public release.
 [0.4.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.0
 [0.4.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.1
 [0.4.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.2
+[0.4.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.3
