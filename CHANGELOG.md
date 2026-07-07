@@ -19,6 +19,13 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.4.4] — 2026-07-07
+
+Pasting multi-line text on Windows now drops in as a single message, and messages typed while a response is streaming are no longer lost.
+
+## Fixes
+- Paste multi-line text on Windows as one message instead of a separate submission per line — pasted snippets now land whole, the same as on macOS and Linux.
+- Keep messages you send while a response is still streaming: multiple queued messages are preserved in order and sent together when the turn finishes, instead of the last one replacing the rest.
 ## [0.4.3] — 2026-07-06
 
 Quit now asks for a confirming second Ctrl+C so you can't drop a session by accident, the status bar keeps up with your current git branch, and duplicate session saves are gone.
@@ -485,7 +492,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.3...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.4...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -507,3 +514,4 @@ Initial public release.
 [0.4.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.1
 [0.4.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.2
 [0.4.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.3
+[0.4.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.4
