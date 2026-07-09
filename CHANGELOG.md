@@ -19,6 +19,17 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.5.0] — 2026-07-09
+
+Loop a prompt across multiple turns with the new /loop command — and the assistant can end a loop as soon as the work is actually done, pace it, or propose one for you to confirm.
+
+## What's new
+- **/loop** — repeat a prompt over multiple turns. `/loop 3x fix the failing tests` runs it up to 3 times; `/loop every 30s check the build` re-runs on an interval; `/loop stop` (or Esc) ends it. A hard iteration cap keeps runaway loops in check.
+- **Assistant-driven loops** — while a loop runs, the assistant can end it early the moment the task is complete (so it stops as soon as it's done instead of running to the limit), change the delay between iterations, or propose a brand-new loop that you approve before it starts.
+- **Jump to latest** — when you scroll up in the chat, a hint appears on the last row; middle-click or click a message to jump straight back to the newest output.
+
+## Fixes
+- Keep mouse-wheel scrolling working after switching tabs or resizing the window on Windows terminals such as Tabby, where the scroll wheel could turn into arrow-key history navigation.
 ## [0.4.4] — 2026-07-07
 
 Pasting multi-line text on Windows now drops in as a single message, and messages typed while a response is streaming are no longer lost.
@@ -492,7 +503,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.4.4...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.5.0...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -515,3 +526,4 @@ Initial public release.
 [0.4.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.2
 [0.4.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.3
 [0.4.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.4
+[0.5.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.5.0
