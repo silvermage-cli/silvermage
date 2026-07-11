@@ -19,6 +19,21 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.6.0] — 2026-07-11
+
+Two new model providers — Ollama Cloud and Kimi — plus one-switch web search for coding-plan providers.
+
+## What's new
+- **Add the Ollama Cloud provider.** Run large hosted models — GLM, Kimi, DeepSeek, Qwen3-Coder, MiniMax, gpt-oss and more — with full reasoning, no local hardware needed. The model list is filtered to capable, frontier-scale models so the picker stays focused; tune the size threshold in settings.
+- **Add the Kimi (Moonshot) provider,** with extended reasoning support.
+- **Add web search for coding-plan providers.** Flip one switch in settings and the built-in web search tool routes through your provider's plan, with a live reachability indicator beside the toggle. It steps aside automatically if you've configured your own search backend.
+- **Add research briefings.** Pass constraints or context up front to keep a research run on-target.
+
+## Fixes
+- **Fix MCP servers intermittently showing as failed on startup.** A connection race could leave a server stuck until you toggled it off and on; connections now settle reliably on launch.
+
+## Improvements
+- **Surface Provider Capabilities near the top of settings** for quicker access.
 ## [0.5.0] — 2026-07-09
 
 Loop a prompt across multiple turns with the new /loop command — and the assistant can end a loop as soon as the work is actually done, pace it, or propose one for you to confirm.
@@ -503,7 +518,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.6.0...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -527,3 +542,4 @@ Initial public release.
 [0.4.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.3
 [0.4.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.4
 [0.5.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.5.0
+[0.6.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.6.0
