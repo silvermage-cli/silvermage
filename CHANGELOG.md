@@ -19,6 +19,30 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.7.0] — 2026-07-19
+
+Schedule prompts to run on a timer — one-shot, recurring, or cron — described in plain language.
+
+## What's new
+
+- **Scheduled tasks — `/schedule`.** Run a prompt once at a set time, on a repeating interval, or on a full cron schedule. Say it in plain language ("every weekday at 9am", "remind me at 3pm") and it's set up for you, or type it directly: `/schedule at 14:00 <prompt>`, `/schedule every 30m <prompt>`, `/schedule "0 9 * * 1-5" <prompt>`.
+- **Persists across restarts.** Schedules survive quitting the app; one that came due while it was closed runs once on the next launch.
+- **Ask the assistant to schedule work** and it proposes a schedule for you to confirm — nothing runs without approval.
+- Manage everything with `/schedule list` and `/schedule stop <id|all>`; a `⏱` indicator shows how many are active.
+
+## Improvements
+
+- Context compaction now keeps more of your recent conversation on large-context models, scaling to the model's window instead of a fixed amount.
+
+## Fixes
+
+- Fixed a case where a running loop could stall when the app was busy — loops now re-arm reliably.
+- Let the assistant drive `/loop` directly (stop early when the task is done, change the pace).
+- Report loop controls accurately when no loop is running.
+
+## Security
+
+- Route scheduled prompts and tool-call arguments through credential masking and the secret vault, so secrets aren't written or persisted in the clear.
 ## [0.6.0] — 2026-07-11
 
 Two new model providers — Ollama Cloud and Kimi — plus one-switch web search for coding-plan providers.
@@ -518,7 +542,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.7.0...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -543,3 +567,4 @@ Initial public release.
 [0.4.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.4.4
 [0.5.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.5.0
 [0.6.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.6.0
+[0.7.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.7.0
