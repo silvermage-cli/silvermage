@@ -19,6 +19,30 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.8.1] — 2026-07-30
+
+Select text with the mouse and copy it, without reaching for Shift.
+
+## What's new
+
+- Add mouse text selection. Click and drag across the transcript to highlight any fragment; release copies it. Drag past the top or bottom edge and the view scrolls so a selection can run past what was on screen when it started, across the whole scrollback rather than just the visible window. Until now the terminal's own selection was unavailable unless you held Shift, because Silvermage claims the mouse for its clickable buttons and copy pills.
+- Refuse to copy a revealed vault secret. A secret shown on screen for its timed window is deliberately never written to the clipboard — over SSH that would put it on the wire.
+- Complete a slash command with Tab. In the suggestion menu, Tab now fills in the highlighted command instead of running it, so you can keep typing arguments. Enter still runs it.
+
+## Fixes
+
+- Fix selection dragging upward doing nothing. Dragging below the transcript scrolled while dragging above it scrolled nothing at all, and a selection that ran off an edge stopped growing the moment it left the visible rows.
+- Stop a left click from jumping to the newest output. Clicking anywhere in the transcript while scrolled up used to throw the view to the bottom — which is exactly when you are most likely to be starting a selection. Middle-click still jumps.
+- Keep auto-follow off while a selection is live. Reaching the bottom mid-drag used to re-arm it, letting streaming output carry the highlight off the screen.
+- Restore auto-follow after a selection made at the bottom is dismissed, so the next reply scrolls into view again.
+- Report an empty selection accurately instead of claiming it held a secret.
+- Prevent a click that dismisses the ghost orb from also triggering whatever sits beneath it.
+
+## Improvements
+
+- Fire clicks on release rather than on press, so a button only acts when the pointer is still on it and a drag that begins over a button is a selection, not a click.
+- Highlight selections with reverse video on terminals without colour, including under `NO_COLOR`, where a background-coloured highlight would be invisible.
+- Drop a selection on resize, since re-wrapping every line at a new width renumbers what the selection pointed at.
 ## [0.8.0] — 2026-07-30
 
 Silvermage now runs plugins and workflows, keeps your secrets out of the model's hands, and asks before anything a plugin ships is allowed to run.
@@ -599,7 +623,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.1...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -626,3 +650,4 @@ Initial public release.
 [0.6.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.6.0
 [0.7.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.7.0
 [0.8.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.0
+[0.8.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.1
