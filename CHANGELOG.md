@@ -19,6 +19,63 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.8.0] — 2026-07-30
+
+Silvermage now runs plugins and workflows, keeps your secrets out of the model's hands, and asks before anything a plugin ships is allowed to run.
+
+## Heads up — new confirmations
+
+Four things now ask for approval that previously did not, **including when confirmations are otherwise turned off**. Turning off confirmations means "stop asking about my own commands"; it has never meant handing a credential to somebody else without a word.
+
+- **Before a project's hooks or plugins run.** Opening a folder no longer runs whatever it ships. Approve it once from `/trust`, or decline and keep working.
+- **Before a plugin runs anything.** Installing a plugin shows exactly what it would execute — its hooks, its servers, its scripts — and installs nothing until you agree.
+- **Before a stored secret leaves in a tool call.** A secret that would travel inside a web request or a file write names the secret and the destination, and waits.
+- **Before a secret is shown on screen**, since a screen may be shared or recorded.
+
+## What's new
+
+- **Add workflows** — a script can drive dozens of sub-agents through a fixed pipeline, in parallel, with a live progress panel showing which agents are running and what they are doing. Plugins that ship workflows can run them; `/workflow` runs one from a file.
+- **Add plugin support** — install plugins from a marketplace and use the skills, agents, commands, hooks and servers they ship. Manage them from `/plugins`.
+- **Add a secret vault** (`/secret`) — store a credential once and refer to it by name. The value is substituted at the last moment, so it never enters the conversation, the session file, or a request to a model provider. A command's secrets travel in the environment rather than on the command line, where any other account on the machine could read them.
+- **Auto-detect `.env` files** — a `.env` you read is taken into the vault, so its values are masked from that point on instead of sitting in the transcript.
+- **Add `/trust`** — see and withdraw approval for the projects and plugins you have allowed to run things.
+- **Add `/subagents`** — after a fan-out, see which agents came back, which did not and why, and what commands they ran.
+- **Show a stored secret on screen** when you ask for it, from `/secret` or by asking in words — the value goes to your terminal without passing through the model, which can then talk about it without ever holding it.
+- **Show a turn's duration** beside its token count, so "that took three minutes" survives the turn ending.
+- **Improve remote access** — choose which address a session is offered on, connect by scanning a QR code instead of typing a URL, and prove the session token rather than transmitting it.
+
+## Security
+
+- **Keep credentials out of the model's context.** Command output, search results, background processes, linter output, git output and replies from external servers are all scanned for credentials before anything reads them. Private keys, cloud keys, connection strings and tokens are redacted in place.
+- **Refuse to read credential files.** SSH keys, cloud credentials, container and cluster configuration, keychains and anything shaped like key material are declined rather than returned — including when reached through a symbolic link with an innocent name.
+- **Verify an update before installing it.** A downloaded release is checked against its published checksum, and nothing is installed if it does not match.
+- **Bound every tool's output**, so one enormous result can no longer crowd out a conversation.
+- **Block requests to internal addresses**, including through redirects, for both fetched pages and outgoing hooks.
+- **Refuse destructive commands** whatever the confirmation setting, including when hidden inside a substitution or behind a wrapper.
+- **Honour a narrowed shell grant.** A component granted one command family is now held to it, rather than being handed the shell.
+- **Keep a plugin inside its own directory** — its files, its installs and its scripts.
+- **Store credentials and memory owner-only**, and preserve a file's permissions when editing it, so a script stays executable and a private file stays private.
+
+## Fixes
+
+- **Recover a sub-agent that fills its context** instead of losing its work.
+- **Wait out a rate limit** rather than treating it as a failure, and stop the run when a plan is genuinely spent — saying which it was.
+- **Keep an agent's answer** when it replies in prose instead of the requested format, picking the answer by its shape rather than its position.
+- **Ask one question at a time.** Concurrent agents no longer stack confirmation prompts where an answer could be applied to the wrong one.
+- **Make sub-agent edits revertable**, like every other edit.
+- **Fix streaming against Ollama**, where a reply could be assembled incorrectly partway through.
+- **Stop a plugin from taking over a built-in command** or replacing another plugin's skill.
+- **Rank slash-command matches** so the name you typed comes first.
+- **Fix the plugin detail screen's toggle**, which changed nothing.
+- **Keep the file picker and scrollback readable** while compacting or streaming, and give the transcript room above the input box.
+
+## Improvements
+
+- **Run research, review and workflows with more agents at once**, with a configurable ceiling and a shared bound so a nested run cannot exceed it.
+- **Stream sub-agent output live** rather than waiting for a whole reply.
+- **Honour a declared reasoning effort** as extended thinking, and accept the full range of levels.
+- **Give each session its own log**, keyed to its other records.
+- **Report a run's token spend** as it happens.
 ## [0.7.0] — 2026-07-19
 
 Schedule prompts to run on a timer — one-shot, recurring, or cron — described in plain language.
@@ -542,7 +599,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.0...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -568,3 +625,4 @@ Initial public release.
 [0.5.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.5.0
 [0.6.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.6.0
 [0.7.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.7.0
+[0.8.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.0
