@@ -19,6 +19,37 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.8.2] — 2026-08-05
+
+Plugins now take effect the moment you install them, secrets stay out of diffs sent to your provider, and the context meter tells the truth after a model switch.
+
+## Fixes
+
+- Register a plugin's sub-agents as soon as it is installed or enabled. Previously they were only picked up at startup, so a plugin you had just installed appeared to work while every sub-agent it defined silently failed to run — a scan that should have dispatched researchers would return nothing and look like a slow model rather than a missing agent. Restarting was the only way to make them available.
+- Keep plugin skills through a reload instead of dropping them, and withdraw a plugin's commands when you revoke it.
+- Stop a resumed session inheriting the previous session's rules and tasks.
+- Stop a provider switch carrying over the wrong model, the wrong context window, or a configuration change you had just made.
+- Stop first-run setup wiping the model you already had configured.
+- Fix the context meter drifting after a model or provider change — it now re-measures everything with the new model's tokenizer instead of keeping stale numbers or blanking parts of the total.
+- Count tool call arguments toward the context total. Large tool calls were invisible to the meter, so the real usage ran ahead of the number shown.
+- Stop automatic compaction firing on every turn when the prompt overhead is larger than the context window.
+- Measure a skill's model override with that model's own tokenizer and window rather than the session's.
+- Roll the date the model sees over at midnight instead of pinning it to when the session started.
+- Fix a hang when the terminal is narrower than a single character.
+- Stop the jump-to-bottom pill erasing an active text selection.
+- Fix status bar segments misdrawing when they contain wide or non-ASCII characters.
+
+## Security
+
+- Withhold sensitive files from `git diff` output before it reaches your provider. A diff carries file contents, so a tracked `.env`, private key, or credential file was reaching the model in full — including through an unscoped diff that named no paths at all. Those sections are now removed, and the ones removed are named so the model knows the diff it is reading is partial.
+- Resolve diff paths correctly even when a filename contains a space, so a secret cannot slip through under a header claiming it was withheld, and a file renamed into a sensitive path is caught by its new name.
+- Show which MCP servers a plugin's sub-agents can reach in the approval prompt. A plugin that shipped only agents previously had nothing to approve and installed without asking.
+- Approve a plugin against its real location rather than an assumed one.
+
+## Improvements
+
+- Copy to the system clipboard from inside tmux.
+- Say plainly when a clipboard copy could not be confirmed, instead of reporting success either way.
 ## [0.8.1] — 2026-07-30
 
 Select text with the mouse and copy it, without reaching for Shift.
@@ -623,7 +654,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.1...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.2...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -651,3 +682,4 @@ Initial public release.
 [0.7.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.7.0
 [0.8.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.0
 [0.8.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.1
+[0.8.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.2
