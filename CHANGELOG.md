@@ -19,6 +19,22 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.8.3] — 2026-08-05
+
+Choose how `.env` files reach the secret vault, including a setting that stops the startup prompt coming back every session.
+
+## What's new
+
+- Add an `always` mode for `.env` auto-ingest. The secret vault lives in memory and starts empty at every launch, so a project's values have to be taken in again each session and the startup prompt returned every single time — anyone keeping a `.env` in every project was answering the same question forever. The setting is now `off`, `ask` (the default, and exactly what it did before) or `always`, cycled from `/config`. Existing settings carry over untouched: the old `true` means `ask` and `false` means `off`.
+- Surface what was taken in. `always` names the file and how many values it picked up instead of acting silently, so an unfamiliar project's `.env` being read is still something you see rather than something you infer.
+
+## Security
+
+- Reject an unrecognised value for the setting rather than guessing at it. A misspelling that resolved to `always` would have started ingesting without asking on the strength of a typo.
+
+## Improvements
+
+- Report the values that were skipped, not just the ones added. Entries already held, and values too short to mask safely, are now counted alongside the rest — a file of seven values that contributed five no longer reads as though all seven are protected.
 ## [0.8.2] — 2026-08-05
 
 Plugins now take effect the moment you install them, secrets stay out of diffs sent to your provider, and the context meter tells the truth after a model switch.
@@ -654,7 +670,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.2...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.3...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -683,3 +699,4 @@ Initial public release.
 [0.8.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.0
 [0.8.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.1
 [0.8.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.2
+[0.8.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.3
