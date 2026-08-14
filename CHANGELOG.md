@@ -19,6 +19,18 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 
+## [0.8.4] — 2026-08-14
+
+Silvermage 0.8.4 adds the GLM-5.3 model and hardens report trust: research can now genuinely be turned off, and every review report gets its citations checked.
+
+## What's new
+
+- Add GLM-5.3 to the GLM provider — 1M-token context window with tool calling and reasoning support.
+
+## Fixes
+
+- Honor the `research.enabled` setting: turning research off in `/config` now removes the research tool from the model's tool list entirely, instead of leaving the pipeline available and letting the model keep attempting calls that were meant to be disabled.
+- Flag unresolvable citations in every review report. `file:line` references that don't exist in the working tree are now marked in a footer — including on single-pass reviews, which previously shipped without any citation check. Controlled by `review.verify_anchors` in `/config` (on by default).
 ## [0.8.3] — 2026-08-05
 
 Choose how `.env` files reach the secret vault, including a setting that stops the startup prompt coming back every session.
@@ -670,7 +682,7 @@ Initial public release.
 - Permission modal for stateful tools in strict mode.
 - Credential masking before output reaches the AI.
 
-[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.3...HEAD
+[Unreleased]: https://github.com/silvermage-cli/silvermage/compare/v0.8.4...HEAD
 [0.1.0]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.0
 [0.1.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.1
 [0.1.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.1.2
@@ -700,3 +712,4 @@ Initial public release.
 [0.8.1]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.1
 [0.8.2]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.2
 [0.8.3]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.3
+[0.8.4]: https://github.com/silvermage-cli/silvermage/releases/tag/v0.8.4
